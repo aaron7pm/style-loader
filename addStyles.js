@@ -10,9 +10,6 @@ var stylesInDom = {},
 			return memo;
 		};
 	},
-	isOldIE = memoize(function() {
-		return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
-	}),
 	getHeadElement = memoize(function () {
 		return document.head || document.getElementsByTagName("head")[0];
 	}),
@@ -28,7 +25,7 @@ module.exports = function(list, options) {
 	options = options || {};
 	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
 	// tags it will allow on a page
-	if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+	if (typeof options.singleton === "undefined") options.singleton = false;
 
 	// By default, add <style> tags to the bottom of <head>.
 	if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
